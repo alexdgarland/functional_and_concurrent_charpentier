@@ -7,12 +7,13 @@ import tinyscalautils.util.{ FastRandom, log2 }
 
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
+import ImbalanceMagnitude.TWO
 
 class BinTreeTests extends AnyFunSuite:
    /* Simple isAVL implementation acceptable since height is stored as a val. */
    private def isAVL(tree: BinTree): Boolean = tree match
       case Empty                => true
-      case Node(_, left, right) => tree.imbalance.abs <= 1 && isAVL(left) && isAVL(right)
+      case Node(_, left, right) => tree.imbalance.magnitude != TWO && isAVL(left) && isAVL(right)
 
    private def insertDelete(maxSize: Int) =
       val size    = FastRandom.nextInt(maxSize)

@@ -3,11 +3,14 @@ package chap08.avl.bst.variant
 import chap08.avl.bst
 import chap08.avl.bst.BinTree
 
+import scala.annotation.targetName
 import scala.language.adhocExtensions
 
 class Node(key: Int, left: BinTree, right: BinTree)
     extends bst.Node(key: Int, left: BinTree, right: BinTree):
-   override def - (k: Int): BinTree =
+   
+  @targetName("minus")
+  override def -(k: Int): BinTree =
       if k < key then Node(key, left - k, right).avl
       else if k > key then Node(key, left, right - k).avl
       else if left.isEmpty then right
